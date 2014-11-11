@@ -18,6 +18,8 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="api\jenkinsController.js" />
+    <Compile Include="api\translators\jenkinsTranslator.js" />
     <Compile Include="test\api\helpers\eventStore.tests.js" />
     <Compile Include="test\api\queryController.tests.js" />
     <Compile Include="test\api\translators\gitHubEventsToApiResponse.tests.js" />
