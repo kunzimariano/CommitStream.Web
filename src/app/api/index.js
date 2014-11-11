@@ -1,6 +1,6 @@
 (function(api) {
 
-  var githubCommits = require('githubCommits'),
+  var githubCommits = require('github-commits'),
     settingsController = require('./settingsController');
 
   api.init = function(app) {
