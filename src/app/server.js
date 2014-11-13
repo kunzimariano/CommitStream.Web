@@ -12,7 +12,7 @@ app.get('/version', function(req, res) {
 });
 
 var api = require("./api");
-//require('./bootstrapper').boot(config);
+require('./bootstrapper').boot(config);
 
 // Wire up express-handlebars as the view engine for express.
 app.engine('handlebars', exphbs());

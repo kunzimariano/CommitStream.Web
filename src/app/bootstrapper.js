@@ -1,43 +1,43 @@
-(function (bootstrapper) {
-  bootstrapper.boot = function (config) {
+(function(bootstrapper) {
+
+  bootstrapper.boot = function(config) {
     var _ = require('underscore'),
-        eventStore = require('./api/helpers/eventStore');
-    
-    var es = new eventStore(config.eventStoreBaseUrl, config.eventStoreUser, config.eventStorePassword);
-    
-    es.getProjections(function (error, response) {
-      createProjections(response);
+      githubCommits = require('github-commits'),
+      EventStore = require('eventstore-client');
+
+    var es = new EventStore({
+      baseUrl: config.eventStoreBaseUrl,
+      username: config.eventStoreUser,
+      password: config.eventStorePassword
     });
-    
-    function createProjections(projectionsFound) {
-      var fs = require('fs');
-      var dir = './projections/';
-      
-      console.log('Looking for projections...');
-      fs.readdir(dir, function (err, files) {
-        if (err) throw err;
-        files.forEach(function (name) {
-          fs.readFile(dir + name, 'utf-8', function (err, script) {
-            if (err) throw err;
-            else {
-              if (!_.findWhere(projectionsFound, { effectiveName: name })) {
-                es.createProjection({ name: name, script: script }, function (error, response, body) {
-                  if (error) {
-                    console.error('ERROR could not create projection ' + name + ':');
-                    console.error(error);
-                  }
-                  else {
-                    console.log('OK created projection ' + name);
-                    console.log(body);
-                  }
-                });
-              } else {
-                console.log('OK found ' + name);
-              }
-            }
-          });
-        });
+
+    console.log('Looking for already existing projections...');
+    es.projections.get(function(error, response) {
+        initProjections(JSON.parse(response.body));
+    });
+
+    var initProjections = function(projectionsFound) {
+      console.log('Looking for new projections...');
+      githubCommits.getProjections(function(item) {
+        if (!_.findWhere(projectionsFound.projections, { effectiveName: item.name })) {
+          createProjection(item)
+        } else {
+          console.log('OK found ' + item.name);
+        }
       });
-    }
+    };
+
+    var createProjection = function(projectionObject) {
+      es.projections.post(projectionObject, function(error, response) {
+        if (error) {
+          console.error('ERROR could not create projection ' + projectionObject.name + ':');
+          console.error(error);
+        } else {
+          console.log('OK created projection ' + projectionObject.name);
+          console.log(response.body);
+        }
+      });
+    };
+
   }
 })(module.exports);
