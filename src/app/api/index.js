@@ -5,8 +5,11 @@
     config = require('../config');
 
   api.init = function(app) {
-    githubCommits.importController.init(app, config);
-    githubCommits.queryController.init(app, config);
     settingsController.init(app);
+
+    githubCommits.controllers.forEach(function(controller) {
+      controller.init(app, config);
+    });
+
   };
 })(module.exports);
