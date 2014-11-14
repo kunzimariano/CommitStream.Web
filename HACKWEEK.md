@@ -18,6 +18,8 @@ IntegrationStream
  - eventstore-client
 - jenkins-jobs
  - eventstore-client
+- stackoverflow-questions
+ - eventstore-client
 
 ## Structure of an integration plugin ##
 What do you need to do in order to write a plugin?
@@ -57,12 +59,13 @@ exports.getProjections = function(callback){
 ```
 
 ## How does this work? ##
-You need to decide which integrations you are going to run, in order to do that modify the config.json in the integration service so it looks something like the next:
+You need to decide which integration you are going to run, in order to do that modify the config.json in the integration service so it looks something like the next:
 ```javascript
-"integrations" : ["kunzimariano/github-commits","matiasheffel/jenkins-jobs"]
+"integrations" : ["kunzimariano/github-commits","matiasheffel/jenkins-jobs", "remedi/stackoverflow-questions"]
 ```
-Once the service starts this will make it download those modules/integrations and load their controllers and projections. It is all dynamic, you don't need to put those modules in the package.json.
+When the service starts this will make it download those modules on runtime, once that is done it will load their controllers and projections. It is all dynamic, you don't need to put those modules in the package.json.
 
+**Modules installation**
 ```javascript
 npm.load({}, function(err) {
 	npm.commands.install(config.integrations, function(er, data) {
@@ -72,5 +75,21 @@ npm.load({}, function(err) {
 });
 ```
 
-controllers loading
-projections loading
+**Controllers loading**
+```javascript
+integrationManager.loadIntegrations(config.integrations, function(integration){
+	integration.controllers.forEach(function(controller) {
+    	controller.init(app, config);
+	});
+});
+```
+
+**Projections loading**
+```javascript
+integrationManager.loadIntegrations(config.integrations, function(integration) {
+	integration.getProjections(createNewProjections);
+});
+```
+
+TODO: 
+- Separate the views from the integration service.
