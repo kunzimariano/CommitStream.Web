@@ -72,6 +72,7 @@ npm.load({}, function(err) {
         resourcePath: protocol + '://' + host + '/'
       });
     });
+    //Stackoverflow endpoint
     app.get('/stackoverflow', function(req, res) {
       res.setHeader('content-type', 'application/javascript');
       var protocol = config.protocol || req.protocol;
