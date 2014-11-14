@@ -1,5 +1,5 @@
 IntegrationStream.Web
-================
+======================
 
 You can try the latest builds of VersionOne with IntegrationStream installed at http://v1commitstream.cloudapp.net/VersionOne
 
