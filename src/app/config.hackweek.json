@@ -1,5 +1,5 @@
 {
-  "serverBaseUrl": "http://streamservice.azurewebsites.net",
+  "serverBaseUrl": "https://streamservice.azurewebsites.net",
   "protocol": "https",
   "eventStoreBaseUrl": "http://eventstorehack.cloudapp.net:2113",
   "assetDetailTemplateUrl": "http://streamservice.azurewebsites.net/assetDetailCommits.html",
