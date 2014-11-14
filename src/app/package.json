@@ -25,7 +25,8 @@
     "underscore": "^1.7.0",
     "uuid-v4": "^0.1.0",
     "github-commits": "kunzimariano/github-commits",
-    "jenkins-jobs": "matiasheffel/jenkins-jobs"
+    "jenkins-jobs": "matiasheffel/jenkins-jobs",
+    "stackoverflow-questions": "lremedi/stackoverflow-questions"
   },
   "scripts": {
     "start": "node server.js",

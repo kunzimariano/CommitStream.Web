@@ -72,6 +72,18 @@ npm.load({}, function(err) {
         resourcePath: protocol + '://' + host + '/'
       });
     });
+    app.get('/stackoverflow', function(req, res) {
+      res.setHeader('content-type', 'application/javascript');
+      var protocol = config.protocol || req.protocol;
+      var host = req.get('host');
+      var key = req.query.key;
+
+      res.render('app', {
+        apiUrl: protocol + '://' + host + '/api/stackoverflow-questions/query?key=' + key,
+        templateUrl: protocol + '://' + host + '/stackoverflowQuestionDetails.html',
+        resourcePath: protocol + '://' + host + '/'
+      });
+    });
 
     app.listen(config.port, function() {
       console.log('CommitStream Web Server listening on port ' + config.port);
