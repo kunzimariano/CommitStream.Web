@@ -20,4 +20,32 @@ IntegrationStream
  - eventstore-client
 
 ## Structure of an integration plugin ##
+What do you need to do in order to write a plugin?
+The first thing to do is to create the right structure for your module.
+```
+
+	package.json	
+	\lib
+		index.js
+		controller01.js
+		controller02.js
+		\projections
+			projection01.js
+			projection02.js
+	\test
+		controller01.tests.js
+		controller02.tests.js
+		\projections
+			projection01.tests.js
+			projection02.tests.js
+```
+
+```javascript
+exports.controllers = [];
+
+exports.getProjections = function(callback){
+}
+```
+
+## How does this work? ##
       
