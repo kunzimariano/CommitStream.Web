@@ -60,6 +60,19 @@ npm.load({}, function(err) {
       });
     });
 
+    app.get('/jenkins', function(req, res) {
+      res.setHeader('content-type', 'application/javascript');
+      var protocol = config.protocol || req.protocol;
+      var host = req.get('host');
+      var key = req.query.key;
+
+      res.render('app', {
+        apiUrl: protocol + '://' + host + '/api/jenkinsJob/query?key=' + key + '&jobName=',
+        templateUrl: protocol + '://' + host + '/jenkinsBuildDetails.html',
+        resourcePath: protocol + '://' + host + '/'
+      });
+    });
+
     app.listen(config.port, function() {
       console.log('CommitStream Web Server listening on port ' + config.port);
     });
