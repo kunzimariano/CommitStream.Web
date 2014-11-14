@@ -1,0 +1,7 @@
+{
+  "serverBaseUrl": "http://streamservice.azurewebsites.net",
+  "protocol":"https",
+  "eventStoreBaseUrl" : "https://v1commitstream.cloudapp.net:2113",
+  "assetDetailTemplateUrl" : "http://streamservice.azurewebsites.net/assetDetailCommits.html",
+  "integrations" : ["kunzimariano/github-commits","matiasheffel/jenkins-jobs"]
+}
