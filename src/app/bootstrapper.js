@@ -2,8 +2,8 @@
 
   bootstrapper.boot = function(config) {
     var _ = require('underscore'),
-      githubCommits = require('github-commits'),
-      EventStore = require('eventstore-client');
+      EventStore = require('eventstore-client'),
+      integrationManager = require('./integrationManager');
 
     var es = new EventStore({
       baseUrl: config.eventStoreBaseUrl,
@@ -13,17 +13,22 @@
 
     console.log('Looking for already existing projections...');
     es.projections.get(function(error, response) {
-        initProjections(JSON.parse(response.body));
+      initProjections(JSON.parse(response.body));
     });
 
     var initProjections = function(projectionsFound) {
-      console.log('Looking for new projections...');
-      githubCommits.getProjections(function(item) {
-        if (!_.findWhere(projectionsFound.projections, { effectiveName: item.name })) {
+      var createNewProjections = function(item) {
+        if (!_.findWhere(projectionsFound.projections, {
+          effectiveName: item.name
+        })) {
           createProjection(item)
         } else {
           console.log('OK found ' + item.name);
         }
+      };
+      console.log('Looking for new projections...');
+      integrationManager.loadIntegrations(config.integrations, function(integration) {
+        integration.getProjections(createNewProjections);
       });
     };
 
