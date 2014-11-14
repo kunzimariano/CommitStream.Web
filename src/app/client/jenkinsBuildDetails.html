@@ -11,8 +11,8 @@
 	{{else}}
 	<ul class="commits.list" style="list-style:none">
 		{{#each events}}
-		<hr />
 		{{#if noStarted}}
+		<hr />		
 		<li class="li.commit" id="{{name}}">
 	  	<p class="commit.info" style="padding-left:20px;font-size: .8em;color: #a6a6a6;"><a href="{{urlJob}}" target="_blank">{{name}} - Build: {{buildNumber}}</a></p>
 	  	{{#if success}} 
