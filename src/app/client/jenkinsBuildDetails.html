@@ -1,0 +1,29 @@
+<div>
+	<div class="stream-title-area">
+		<div class="titlebar">
+			<div class="title-container">
+				<h3>Build Details</h3>
+			</div>
+		</div>
+	</div>
+	{{#if noEvents}}
+	<p style="color: #dedede;font-size: .95em;margin-top: 0.5em;padding-left:20px;text-align: center;">No builds available...</p>
+	{{else}}
+	<ul class="commits.list" style="list-style:none">
+		{{#each events}}
+		{{#if noStarted}}
+		<hr />		
+		<li class="li.commit" id="{{name}}">
+	  	<p class="commit.info" style="padding-left:20px;font-size: .8em;color: #a6a6a6;"><a href="{{urlJob}}" target="_blank">{{name}} - Build: {{buildNumber}}</a></p>
+	  	{{#if success}} 
+	  	<p class="commit.message" style="margin-left:18px; margin-top:5px; padding-left:20px;line-height: 1.15em;background-image:url({{../resourcePath}}green.png); background-size: 20px auto; background-repeat:no-repeat;">
+	  	{{else}}
+	  	<p class="commit.message" style="margin-left:18px; margin-top:5px; padding-left:20px;line-height: 1.15em;background-image:url({{../resourcePath}}red.png); background-size: 20px auto; background-repeat:no-repeat;">
+	  	{{/if}}
+	  	<span class="message">{{phase}} - {{status}}</span></p>
+	  	</li>	 
+  	{{/if}}
+	  	{{/each}}
+  	</ul>
+	{{/if}}
+</div>

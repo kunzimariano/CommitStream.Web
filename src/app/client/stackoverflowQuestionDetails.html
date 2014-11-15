@@ -1,0 +1,22 @@
+<div>
+	<div class="stream-title-area">
+		<div class="titlebar">
+			<div class="title-container">
+				<h3>Stackoverflow Questions Details</h3>
+			</div>
+		</div>
+	</div>
+	{{#if noEvents}}
+	<p style="color: #dedede;font-size: .95em;margin-top: 0.5em;padding-left:20px;text-align: center;">No questions available...</p>
+	{{else}}
+	<ul class="commits.list" style="list-style:none">
+		{{#each events}}
+		<hr />
+		<li class="li.commit" id="{{question_id}}">
+	  	<p class="commit.info" style="padding-left:20px;font-size: .8em;color: #a6a6a6;"><a href="{{link}}" target="_blank">{{title}}</a></p>
+	  	<p class="commit.message" style="margin-left:18px; margin-top:5px; padding-left:20px;line-height: 1.15em;background-image:url({{../resourcePath}}stackoverflow-icon.png); background-repeat:no-repeat; background-size: 20px auto;"><span class="message">Is answered: {{is_answered}}</span></p>
+	  	</li>
+	  	{{/each}}
+  	</ul>
+	{{/if}}
+</div>
