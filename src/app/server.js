@@ -17,6 +17,16 @@ npm.load({}, function(err) {
   npm.commands.install(config.integrations, function(er, data) {
     if (er) console.log(er);
 
+    var fs = require('fs');
+    fs.readdir('./node_modules', function(err, files) {
+      if (err) throw err;
+      console.log('Files in node_modules: ')
+      files.forEach(function(file) {
+        console.log(file);
+      });
+
+    });
+
     var api = require("./api");
     require('./bootstrapper').boot(config);
 
