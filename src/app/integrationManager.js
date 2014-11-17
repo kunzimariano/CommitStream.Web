@@ -1,9 +1,11 @@
 module.exports.loadIntegrations = function(integrations, cb) {
   integrations.forEach(function(moduleName) {
-    if (moduleName.indexOf('/') > -1) {
-      moduleName = moduleName.split('/')[1];
-    }
-    var integration = require(moduleName);
+    var parts = moduleName.split('/')
+    // gets the last token from the array which in this case is the module name
+    // modulename
+    // gitowner/gitrepo
+    // ../folder/anotherfolder/modulename
+    var integration = require(parts[parts.length - 1]);
     cb(integration);
   });
 }
