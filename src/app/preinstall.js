@@ -1,5 +1,4 @@
 var config = require('./config'),
-  fs = require('fs'),
   npm = require('npm');
 
 var getModuleName = function(s) {
@@ -14,20 +13,11 @@ var getModuleName = function(s) {
   return tokens[0];
 }
 
-console.log('Before the modules are installed.')
+console.log('Installing integrations...')
 npm.load({}, function(err) {
   if (err) console.log(err);
   npm.commands.install(config.integrations, function(er, data) {
     if (er) console.log(er);
-    console.log('After the modules are installed.')
+    console.log('Integrations have been installed.');
   });
 });
-
-// config.integrations.forEach(function(item) {
-//   var filename = './package.json';
-//   var p = require(filename);
-//   var module = item;
-//   var moduleName = getModuleName(item);
-//   p['dependencies'][moduleName] = module;
-//   fs.writeFileSync(filename, JSON.stringify(p));
-// });
