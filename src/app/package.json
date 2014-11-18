@@ -28,7 +28,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha -u exports -R spec test/**/*tests.js",
-    "preinstall": "node preinstall.js"
+    "prestart": "node preinstall.js"
   },
   "author": "VersionOne, Inc.",
   "license": "MIT"
