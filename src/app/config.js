@@ -25,4 +25,5 @@
   config.eventStoreAssetQueryParams = nconf.get('eventStoreAssetQueryParams') || '/head/backward/5?embed=content';
   config.assetDetailTemplateUrl = nconf.get('assetDetailTemplateUrl') || config.serverBaseUrl + ':' + config.port + '/assetDetailCommits.html';
   config.integrations = nconf.get('integrations') || [];
+  config.waitBeforeStart = nconf.get('waitBeforeStart') || 0;
 })(module.exports);

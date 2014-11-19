@@ -5,9 +5,7 @@ var express = require('express'),
   apikey = require('./apikey'),
   exphbs = require('express-handlebars');
 
-console.log('Waiting 10 seconds for integrations to be installed');
-
-setTimeout(function() {
+var initServer = function() {
   app.get('/version', function(req, res) {
     res.json({
       version: "0.0.0"
@@ -87,4 +85,7 @@ setTimeout(function() {
     console.log('CommitStream Web Server listening on port ' + config.port);
   });
 
-}, 10000);
+};
+
+console.log('Waiting ' + config.waitBeforeStart + ' seconds for integrations to be installed');
+setTimeout(initServer, config.waitBeforeStart * 1000);

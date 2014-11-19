@@ -3,6 +3,7 @@
   "protocol": "https",
   "eventStoreBaseUrl": "http://eventstorehack.cloudapp.net:2113",
   "assetDetailTemplateUrl": "http://streamservice.azurewebsites.net/assetDetailCommits.html",
+  "waitBeforeStart": "10",
   "integrations": ["kunzimariano/github-commits", "matiasheffel/jenkins-jobs", "lremedi/stackoverflow-questions"],
   "ignore": ["kunzimariano/github-commits", "matiasheffel/jenkins-jobs", "lremedi/stackoverflow-questions"]
 }
