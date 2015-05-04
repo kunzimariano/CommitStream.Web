@@ -60,6 +60,7 @@ npm.load({}, function(err) {
       });
     });
 
+    //TODO: remove this and make it part of the plug in
     app.get('/jenkins', function(req, res) {
       res.setHeader('content-type', 'application/javascript');
       var protocol = config.protocol || req.protocol;
@@ -72,7 +73,8 @@ npm.load({}, function(err) {
         resourcePath: protocol + '://' + host + '/'
       });
     });
-    //Stackoverflow endpoint
+
+    //TODO: remove this and make it part of the plug in
     app.get('/stackoverflow', function(req, res) {
       res.setHeader('content-type', 'application/javascript');
       var protocol = config.protocol || req.protocol;
